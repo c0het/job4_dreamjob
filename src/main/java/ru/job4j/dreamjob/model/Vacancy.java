@@ -18,6 +18,17 @@ public class Vacancy {
         this.title = title;
     }
 
+    public Vacancy(int id, String title, String description, LocalDateTime creationDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.creationDate = creationDate;
+    }
+
+    public Vacancy(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
@@ -32,6 +43,22 @@ public class Vacancy {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override
