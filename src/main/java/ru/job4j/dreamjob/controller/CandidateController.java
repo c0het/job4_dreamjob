@@ -1,15 +1,11 @@
 package ru.job4j.dreamjob.controller;
 
-import org.springframework.boot.Banner;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.dreamjob.repository.CandidateRepository;
 import ru.job4j.dreamjob.repository.MemoryCandidateRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.job4j.dreamjob.repository.MemoryVacancyRepository;
-import ru.job4j.dreamjob.repository.VacancyRepository;
 
 @Controller
 @RequestMapping("/candidates")
@@ -22,4 +18,10 @@ public class CandidateController {
         model.addAttribute("candidates", candidateRepository.findAll());
         return "candidates/list";
     }
+
+    @GetMapping("/create")
+        public String getCreationPage() {
+            return "candidates/create";
+    }
+
 }
