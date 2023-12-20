@@ -21,11 +21,10 @@ public class Vacancy {
         this.title = title;
     }
 
-    public Vacancy(int id, String title, String description, LocalDateTime creationDate) {
+    public Vacancy(int id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.creationDate = creationDate;
     }
 
     public Vacancy(int id) {
