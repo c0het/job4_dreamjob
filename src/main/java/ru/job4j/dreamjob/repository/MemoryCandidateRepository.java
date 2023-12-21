@@ -19,14 +19,12 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
     private MemoryCandidateRepository() {
-        save(new Candidate(0, "Дмитрий", "Стаже", LocalDateTime.now().minusDays(4).format(formatter)));
-        save(new Candidate(0, "Николай", "Джун", LocalDateTime.now().minusDays(3).format(formatter)));
-        save(new Candidate(0, "Константин", "Джун+", LocalDateTime.now().minusDays(2).format(formatter)));
-        save(new Candidate(0, "Виктор", "Мидл", LocalDateTime.now().minusDays(1).format(formatter)));
-        save(new Candidate(0, "Владимир", "Мидл+", LocalDateTime.now().format(formatter)));
+        save(new Candidate(0, "Дмитрий", "Стаже"));
+        save(new Candidate(0, "Николай", "Джун"));
+        save(new Candidate(0, "Константин", "Джун+"));
+        save(new Candidate(0, "Виктор", "Мидл"));
+        save(new Candidate(0, "Владимир", "Мидл+"));
     }
 
     public static MemoryCandidateRepository getInstance() {
@@ -41,14 +39,14 @@ public class MemoryCandidateRepository implements CandidateRepository {
     }
 
     @Override
-    public void deleteById(int id) {
-        candidates.remove(id);
+    public Candidate deleteById(int id) {
+        return candidates.remove(id);
     }
 
     @Override
     public boolean update(Candidate candidate) {
         return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) ->
-                new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(), candidate.getCreationDate())) != null;
+                new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription())) != null;
     }
 
     @Override

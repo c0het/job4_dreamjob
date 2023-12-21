@@ -1,11 +1,11 @@
 package ru.job4j.dreamjob.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.repository.CandidateRepository;
 import ru.job4j.dreamjob.repository.MemoryCandidateRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/candidates")
@@ -24,4 +24,34 @@ public class CandidateController {
             return "candidates/create";
     }
 
+    @GetMapping("/{id}")
+    public String getById(Model model, @PathVariable int id) {
+        var candidateOptional = candidateRepository.findById(id);
+        if (candidateOptional.isEmpty()) {
+            model.addAttribute("message", "Кандидат не найден");
+            return "errors/404";
+        }
+        model.addAttribute("candidate", candidateOptional.get());
+        return "candidates/one";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Candidate candidate, Model model) {
+        var isUpdate = candidateRepository.update(candidate);
+        if (!isUpdate) {
+            model.addAttribute("message", "Кандидат не найден");
+            return "errors/404";
+        }
+        return "redirect:/candidates";
+    }
+
+    @GetMapping("/delet/{id}")
+    public String delete(Model model, @PathVariable int id) {
+        var idDeleted = candidateRepository.deleteById(id);
+        if (idDeleted == null) {
+            model.addAttribute("message", "Кандидат не найден");
+            return "errors/404";
+        }
+        return "redirect:/candidates";
+    }
 }
