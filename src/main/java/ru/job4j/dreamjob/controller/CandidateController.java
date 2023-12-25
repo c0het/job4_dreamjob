@@ -45,7 +45,7 @@ public class CandidateController {
         return "redirect:/candidates";
     }
 
-    @GetMapping("/delet/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
         var idDeleted = candidateRepository.deleteById(id);
         if (idDeleted == null) {

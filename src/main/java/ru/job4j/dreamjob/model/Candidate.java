@@ -15,9 +15,7 @@ public class Candidate {
 
     private String description;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
-    private String creationDate = LocalDateTime.now().format(formatter);
+    private LocalDateTime creationDate = LocalDateTime.now();
 
     public Candidate() {
     }
@@ -45,7 +43,7 @@ public class Candidate {
         return description;
     }
 
-    public String getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -61,7 +59,7 @@ public class Candidate {
         this.description = description;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
