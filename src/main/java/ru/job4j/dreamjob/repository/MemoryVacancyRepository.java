@@ -4,9 +4,9 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Vacancy;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @ThreadSafe
@@ -15,7 +15,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);
 
-    private final Map<Integer, Vacancy> vacancies = new Hashtable<>();
+    private final Map<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
         save(new Vacancy(0, "Intern Java Developer", "Стажер Java"));
