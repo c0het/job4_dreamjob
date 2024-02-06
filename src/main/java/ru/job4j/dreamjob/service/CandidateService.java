@@ -10,7 +10,7 @@ public interface CandidateService {
 
     Candidate save(Candidate candidate, FileDto dto);
 
-    Candidate deleteById(int id);
+    Optional<Candidate> deleteById(int id);
 
     boolean update(Candidate candidate, FileDto image);
 

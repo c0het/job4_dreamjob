@@ -18,8 +18,8 @@ public class SimpleCandidateService implements CandidateService {
 
     private final FileService fileService;
 
-    public SimpleCandidateService(CandidateRepository candidateRepository, FileService fileService) {
-        this.candidateRepository = candidateRepository;
+    public SimpleCandidateService(CandidateRepository sql2oCandidateRepository, FileService fileService) {
+        this.candidateRepository = sql2oCandidateRepository;
         this.fileService = fileService;
     }
 
@@ -35,8 +35,13 @@ public class SimpleCandidateService implements CandidateService {
     }
 
     @Override
-    public Candidate deleteById(int id) {
-        return candidateRepository.deleteById(id);
+    public Optional<Candidate> deleteById(int id) {
+        var fileOptional = findById(id);
+        if (fileOptional.isPresent()) {
+            candidateRepository.deleteById(id);
+            fileService.deleteById(fileOptional.get().getFileId());
+        }
+        return fileOptional;
     }
 
     @Override
